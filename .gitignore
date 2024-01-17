@@ -3,3 +3,4 @@ mysql_data/*
 mysql_data
 src/.DS_Store
 .DS_Store
+.env
