@@ -1,6 +1,11 @@
 mysql/*
 mysql_data/*
 mysql_data
+mysql_data_old/*
+mysql_data_old
+mysql_data_old2/*
+mysql_data_old2
 src/.DS_Store
 .DS_Store
 .env
+

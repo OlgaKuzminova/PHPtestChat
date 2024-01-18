@@ -7,10 +7,6 @@ logs:
 ps:
 	docker-compose ps
 
-down:
-	docker stop tasksimg || true
-	docker rm tasksimg || true
-	
 stop:
 	docker-compose stop
 

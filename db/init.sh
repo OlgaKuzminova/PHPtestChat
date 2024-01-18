@@ -35,6 +35,6 @@ filename="./db/createdb.sql"
 sed -i "s/TEMP_DB_NAME/$dbname/" $filename
 sed -i "s/TEMP_DB_USER/$dbuser/" $filename
 sed -i "s/TEMP_DB_PASS/$pass/" $filename
-sed -i "s/TEMP_DB_PASS/$rootpass/" $filename
+
 
 echo "done"
