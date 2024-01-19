@@ -1,15 +1,9 @@
 mysql/*
 mysql_data/*
 mysql_data
-mysql_data_old/*
-mysql_data_old
-mysql_data_old2/*
-mysql_data_old2
-mysql_data_old3/*
-mysql_data_old3
-.db/createdb.sql
-src/.DS_Store
-.DS_Store
+
+db/createdb.sql
+
 .env
-.gitignore
+
 
