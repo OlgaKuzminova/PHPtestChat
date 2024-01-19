@@ -30,7 +30,8 @@ echo "DB_DATABASE=$dbname" >> .env
 echo "DB_USERNAME=$dbuser" >> .env
 echo "DB_PASSWORD=$pass" >> .env
 
-cp -pr ./db/initial.sql ./db/createdb.sql
+cp ./db/initial.sql ./db/createdb.sql
+pwd
 filename="./db/createdb.sql"
 sed -i "s/TEMP_DB_NAME/$dbname/" $filename
 sed -i "s/TEMP_DB_USER/$dbuser/" $filename

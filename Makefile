@@ -11,7 +11,9 @@ stop:
 	docker-compose stop
 
 init-db:
+	pwd
 	sh ./db/init.sh
+	pwd
 	docker-compose up -d --build
 
 remove-db:
