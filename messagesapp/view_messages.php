@@ -10,7 +10,7 @@
         <?php foreach ($result as $message): ?>
             <li>
                 <h3><?= $message['title'] ?></h3>
-                <p><?= $message['summary'] ?></p>
+                <p><?= $message['brief_content'] ?></p>
                 <a href="index.php?action=viewMessage&id=<?= $message['id'] ?>">Просмотреть сообщение</a>
             </li>
         <?php endforeach; ?>

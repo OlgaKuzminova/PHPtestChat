@@ -27,6 +27,16 @@ echo "Соединение успешно ";
 $sql = "SELECT * FROM messages";
 $result = $db->query($sql);
 
+$rows = array();
+while($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+}
+
+$templateData = array('results' => $rows);
+$templateFile = 'view_messages.php';
+
+include($templateFile);
+
 
 if ($result->num_rows > 0) {
   
