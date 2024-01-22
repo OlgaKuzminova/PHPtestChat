@@ -19,17 +19,19 @@ class Database {
         echo "Соединение успешно";
     }
 
-    public function getMessages() {
-        $sql = "SELECT * FROM messages";
-        $result = $this->db->query($sql);
+	public function getMessages($page, $perPage) {
+		$offset = ($page - 1) * $perPage;
+		$sql = "SELECT * FROM messages LIMIT $offset, $perPage";
+		$result = $this->db->query($sql);
 
-        $rows = array();
-        while($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
+		$rows = array();
+		while($row = $result->fetch_assoc()) {
+			$rows[] = $row;
+		}
+		
+		return $rows;
+	}
 
-        return $rows;
-    }
 
     public function closeConnection() {
         $this->db->close();
@@ -51,7 +53,10 @@ class ViewMessages {
 
 
 $db = new Database();
-$messages = $db->getMessages();
+$page = 1; 
+$perPage = 10; 
+$messages = $db->getMessages($page, $perPage);
+
 
 $view = new ViewMessages(['results' => $messages]);
 $view->renderTemplate();
