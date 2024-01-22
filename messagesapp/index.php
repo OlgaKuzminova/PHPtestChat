@@ -1,55 +1,61 @@
 <?php
+class Database {
+    private $servername = "mysql";
+    private $username = "docker";
+    private $password = "123";
+    private $dbname = "docker";
+    private $port = 3306;
+    private $charset = 'utf8mb4';
+    private $db;
 
-//require('view_messages.php');
+    public function __construct() {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $this->db = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->port);
+        $this->db->set_charset($this->charset);
+        $this->db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
+        if ($this->db->connect_error) {
+            die("Ошибка соединения: " . $this->db->connect_error);
+        }
+        echo "Соединение успешно";
+    }
 
+    public function getMessages() {
+        $sql = "SELECT * FROM messages";
+        $result = $this->db->query($sql);
 
+        $rows = array();
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
 
-$servername = "mysql";
-$username = "docker";
-$password = "123";
-$dbname = "docker";
-$port     = 3306;
-$charset  = 'utf8mb4';
+        return $rows;
+    }
 
-
-
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$db = new mysqli($servername, $username, $password, $dbname, $port);
-$db->set_charset($charset);
-$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
-if ($db->connect_error) {
-  die("Ошибка соединения: " . $db->connect_error);
-}
-echo "Соединение успешно ";
-
-
-
-$sql = "SELECT * FROM messages";
-$result = $db->query($sql);
-
-$rows = array();
-while($row = $result->fetch_assoc()) {
-    $rows[] = $row;
-}
-
-$templateData = array('results' => $rows);
-$templateFile = 'view_messages.php';
-
-include($templateFile);
-
-
-if ($result->num_rows > 0) {
-  
-  while($row = $result->fetch_assoc()) {
-    echo "Заголовок сообщения: " . $row["title"]. " - Краткое содержание: " . $row["brief_content"]. "<br>";
-  }
-} else {
-  echo "0 результатов";
+    public function closeConnection() {
+        $this->db->close();
+    }
 }
 
+class ViewMessages {
+    private $messages;
 
-$db->close();
+    public function __construct($messages) {
+        $this->messages = $messages;
+    }
+
+    public function renderTemplate() {
+        include('view_messages.php');
+    }
+}
 
 
 
+$db = new Database();
+$messages = $db->getMessages();
+
+$view = new ViewMessages(['results' => $messages]);
+$view->renderTemplate();
+
+$db->closeConnection();
 ?>
+
