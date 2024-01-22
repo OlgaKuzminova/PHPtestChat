@@ -6,7 +6,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./html:/var/www/html
+      - ./messagesapp/html:/var/www/html
+      - ./messagesapp.conf:/etc/apache2/sites-available/messagesapp.conf
     depends_on:
       - mysql
 

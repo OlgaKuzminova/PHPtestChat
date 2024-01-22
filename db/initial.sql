@@ -6,6 +6,7 @@ SET collation_connection = 'utf8_general_ci';
 SET default_collation_for_utf8mb4 = 'utf8mb4_general_ci';
 SET collation_server = 'utf8_general_ci';
 SET collation_database = 'utf8_general_ci';
+SET NAMES utf8;
 
 GRANT ALL PRIVILEGES ON TEMP_DB_NAME.* TO 'TEMP_DB_USER'@'%';
 
