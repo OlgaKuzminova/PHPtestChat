@@ -1,4 +1,5 @@
 <?php
+namespace messagesapp;
 class Database {
     private $servername = "mysql";
     private $username = "docker";
@@ -38,34 +39,4 @@ class Database {
         $this->db->close();
     }
 }
-
-class ViewMessages {
-    private $messages;
-
-    public function __construct($messages) {
-        $this->messages = $messages;
-    }
-
-    public function renderTemplate() {
-        include('view_messages.php');
-    }
-}
-
-
-
-$db = new Database();
-$perPage = 10;
-$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; 
-$messages = $db->getMessages($page, $perPage);
-$totalMessages = count($messages);
-$results = array('messages' => $messages, 'totalMessages' => $totalMessages, 'perPage' => $perPage, 'currentPage' => $page);
-
-
-
-$view = new ViewMessages($results);
-$view->renderTemplate();
-
-$db->closeConnection();
-
 ?>
-
