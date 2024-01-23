@@ -1,5 +1,7 @@
 <?php
 namespace messagesapp;
+use mysqli;
+
 class Database {
     private $servername = "mysql";
     private $username = "docker";
