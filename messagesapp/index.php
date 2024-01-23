@@ -1,21 +1,10 @@
 <?php
 
 require_once './models/database.php';
-
+require_once './controllers/view_messages_controller.php';
 
 use \messagesapp\Database;
-
-class ViewMessages {
-    private $messages;
-
-    public function __construct($messages) {
-        $this->messages = $messages;
-    }
-
-    public function renderTemplate() {
-        include('./views/view_messages.php');
-    }
-}
+use \messagesapp\ViewMessages;
 
 
 

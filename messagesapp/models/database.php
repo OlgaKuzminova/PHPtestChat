@@ -13,29 +13,32 @@ class Database {
 
     public function __construct() {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-        $this->db = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->port);
-        $this->db->set_charset($this->charset);
-        $this->db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
-        if ($this->db->connect_error) {
-            die("Ошибка соединения: " . $this->db->connect_error);
+        try {
+            $this->db = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->port);
+            $this->db->set_charset($this->charset);
+            $this->db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
+            echo "Соединение успешно";
+        } catch (mysqli_sql_exception $e) {
+            throw new Exception("Ошибка соединения: " . $e->getMessage());
         }
-        echo "Соединение успешно";
     }
 
-	public function getMessages($page, $perPage) {
-		$offset = ($page - 1) * $perPage;
-		$sql = "SELECT * FROM messages LIMIT $offset, $perPage";
-		$result = $this->db->query($sql);
-
-		$rows = array();
-		
-		while($row = $result->fetch_assoc()) {
-			$rows[] = $row;
-		}
-
-		return $rows;
-	}
-
+    public function getMessages($page, $perPage) {
+        $offset = ($page - 1) * $perPage;
+        $sql = "SELECT * FROM messages LIMIT ?, ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("ii", $offset, $perPage);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        
+        $stmt->close();
+        
+        return $rows;
+    }
 
     public function closeConnection() {
         $this->db->close();
