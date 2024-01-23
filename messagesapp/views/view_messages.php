@@ -8,7 +8,7 @@
     <ul>
 			   <?php 
 		foreach ($this->messages['messages'] as $message) {
-			echo $message['title'] . ": " . $message['brief_content'] . "<br>";
+			echo "<li><a href='view_message.php?id=" . $message['message_id'] . "'>" . $message['title'] . "</a>: " . $message['brief_content'] . "</li>";
 		}
 		?>
 
