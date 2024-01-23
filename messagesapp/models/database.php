@@ -40,6 +40,44 @@ class Database {
         return $rows;
     }
 
+    public function getMessageWithComments($messageId) {
+        $sql = "SELECT m.*, c.* FROM messages m 
+                LEFT JOIN comments c ON m.id = c.message_id
+                WHERE m.id = ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $messageId);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $messageWithComments = [];
+    
+        while ($row = $result->fetch_assoc()) {
+            if (!isset($messageWithComments['message'])) {
+                $messageWithComments['message'] = [
+                    'id' => $row['id'],
+                    'title' => $row['title'],
+                    'text' => $row['text'],
+                    // Другие поля сообщения
+                ];
+            }
+    
+            if (!empty($row['comment_id'])) {
+                $messageWithComments['comments'][] = [
+                    'id' => $row['comment_id'],
+                    'message_id' => $row['message_id'],
+                    'text' => $row['comment_text'],
+                    // Другие поля комментария
+                ];
+            }
+        }
+    
+        $stmt->close();
+    
+        return $messageWithComments;
+    }
+    
+
     public function closeConnection() {
         $this->db->close();
     }
