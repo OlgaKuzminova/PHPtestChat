@@ -24,16 +24,16 @@ echo "Соединение успешно ";
 
 
 
-// Получение идентификатора сообщения из GET-параметров
+
 if(isset($_GET['id'])) {
     $messageId = $_GET['id'];
 
-    // Выполнение запроса к базе данных для получения конкретного сообщения
+
     $sql = "SELECT * FROM messages WHERE id = $messageId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Вывод сообщения
+
         $row = $result->fetch_assoc();
         echo "Заголовок: " . $row['title'] . "<br>";
         echo "Текст: " . $row['text'];
@@ -48,3 +48,5 @@ $db->close();
 
 
 ?>
+
+

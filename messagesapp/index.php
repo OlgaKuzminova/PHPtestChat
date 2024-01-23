@@ -30,7 +30,6 @@ class Database {
 			$rows[] = $row;
 		}
 
-		
 		return $rows;
 	}
 
@@ -55,24 +54,14 @@ class ViewMessages {
 
 
 $db = new Database();
-$page = 1; 
-$perPage = 10; 
-$results = array();
-$page = 0;
-
-if (isset($_GET['page']) && $_GET['page'] > 0) 
-{
-    $page = $_GET['page'];
-}
-
-
+$perPage = 10;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; 
 $messages = $db->getMessages($page, $perPage);
-$rows = count($messages);
-var_dump($rows);
+$totalMessages = count($messages);
+$results = array('messages' => $messages, 'totalMessages' => $totalMessages, 'perPage' => $perPage, 'currentPage' => $page);
 
 
-$results = array('messages' => $messages, 'rows' => $rows, 'perPage' => $perPage, 'Page' => $Page);
-var_dump($results);
+
 $view = new ViewMessages($results);
 $view->renderTemplate();
 
