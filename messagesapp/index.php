@@ -25,9 +25,11 @@ class Database {
 		$result = $this->db->query($sql);
 
 		$rows = array();
+		
 		while($row = $result->fetch_assoc()) {
 			$rows[] = $row;
 		}
+
 		
 		return $rows;
 	}
@@ -55,12 +57,26 @@ class ViewMessages {
 $db = new Database();
 $page = 1; 
 $perPage = 10; 
+$results = array();
+$page = 0;
+
+if (isset($_GET['page']) && $_GET['page'] > 0) 
+{
+    $page = $_GET['page'];
+}
+
+
 $messages = $db->getMessages($page, $perPage);
+$rows = count($messages);
+var_dump($rows);
 
 
-$view = new ViewMessages(['results' => $messages]);
+$results = array('messages' => $messages, 'rows' => $rows, 'perPage' => $perPage, 'Page' => $Page);
+var_dump($results);
+$view = new ViewMessages($results);
 $view->renderTemplate();
 
 $db->closeConnection();
+
 ?>
 

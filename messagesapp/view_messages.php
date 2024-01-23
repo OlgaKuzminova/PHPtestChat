@@ -7,15 +7,26 @@
     <h1>Список сообщений</h1>
     <ul>
 			   <?php 
-		foreach ($this->messages['results'] as $message) {
-			echo $message['title'] . ": " . $message['full_content'] . "<br>";
+		foreach ($this->messages['messages'] as $message) {
+			echo $message['title'] . ": " . $message['brief_content'] . "<br>";
 		}
 		?>
 
     </ul>
     <div>
-    <a href="?page=1">1</a>
-    <a href="?page=2">2</a>
+		<?php 
+		
+		$num_pages = ceil($this->messages['rows'] / $this->messages['perPage']);
+		
+		?>
+    Страницы: 
+<? while ($this->messages['page']++ < $num_pages): ?>
+<? if ($this->messages['page'] == $cur_page): ?>
+<b><?=$page?></b>
+<? else: ?> 
+<a href="?page=<?=$page?>"><?=$page?></a>
+<? endif ?> 
+<? endwhile ?> 
     
 </div>
 </body>
