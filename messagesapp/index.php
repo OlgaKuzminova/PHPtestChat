@@ -1,6 +1,6 @@
 <?php
 
-require_once './model/database.php';
+require_once './models/database.php';
 
 
 use \messagesapp\Database;
@@ -13,7 +13,7 @@ class ViewMessages {
     }
 
     public function renderTemplate() {
-        include('./view/view_messages.php');
+        include('./views/view_messages.php');
     }
 }
 
