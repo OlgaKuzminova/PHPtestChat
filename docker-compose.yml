@@ -10,6 +10,9 @@ services:
     volumes:
       - ./messagesapp:/var/www/html
       - ./messagesapp.conf:/etc/apache2/sites-available/messagesapp.conf
+      - ./messagesapp.conf:/usr/local/apache2/conf/extra/messagesapp.conf
+      - ./.htaccess:/var/www/html/.htaccess
+      - ./messagesapp:/usr/local/apache2/htdocs
     extra_hosts:
       - "messagesapp.com:127.0.0.1"
     depends_on:
