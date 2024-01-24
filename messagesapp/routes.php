@@ -1,31 +1,22 @@
 <?php
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Получаем только путь из запроса
 
-$path = $_SERVER['REQUEST_URI'];
+if (preg_match('~^\/view_message\.php\?id=\d+$~', $path, $matches)) { 
 
-// Роутинг
-switch ($path) {
-    case '/': 
-        echo 'переадресация на роут работает';
-        // Логика для отображения списка сообщений
-        break;
-    case '/message': // Просмотр сообщения и списка комментариев
-        // Логика для отображения сообщения и комментариев
-        break;
-    case '/add-message': // Добавление нового сообщения
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Логика для отображения формы добавления сообщения
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Логика для обработки отправленной формы и добавления сообщения в базу данных
-        }
-        break;
-    case '/edit-message': // Редактирование сообщения
-        // Логика для отображения формы редактирования сообщения и обработки изменений
-        break;
-    case '/add-comment': // Добавление комментария
-        // Логика для обработки добавления комментария к конкретному сообщению
-        break;
-    default:
-        http_response_code(404);
-        echo '404 Not Found';
-        break;
+    $id = $matches[1]; 
+    echo 'работает';
+} elseif ($path === '/message') {
+    
+} elseif ($path === '/add-message') {
 }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+       
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+   
+} else {
+    http_response_code(404);
+    echo 'внутри роута';
+}
+?>

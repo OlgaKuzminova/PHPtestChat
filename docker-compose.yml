@@ -10,6 +10,8 @@ services:
     volumes:
       - ./messagesapp:/var/www/html
       - ./messagesapp.conf:/etc/apache2/sites-available/messagesapp.conf
+    extra_hosts:
+      - "messagesapp.com:127.0.0.1"
     depends_on:
       - mysql
 
