@@ -1,7 +1,7 @@
 <?php
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Получаем только путь из запроса
 
-if (preg_match('~^\/view_message\.php\?id=\d+$~', $path, $matches)) { 
+if (preg_match('/\/view_message\.php\?id=\d+/', $path, $matches)) { 
 
     $id = $matches[1]; 
     echo 'работает';

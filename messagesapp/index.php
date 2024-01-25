@@ -6,17 +6,12 @@ require_once './controllers/view_messages_controller.php';
 use messagesapp\Database;
 use messagesapp\ViewMessages;
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = $_SERVER['REQUEST_URI'];
 echo $path;
 
 
-if (!preg_match('~^\/(\?page=(\d+))?$~', $path)) {
-    echo 'routes.php'; 
+if (!preg_match('~^\/(\?page=(\d+))?$~', $path)) { 
     require 'routes.php';
-    
-
-} elseif (preg_match('~^\/view_message\.php\?id=\d+$~', $path)) {
-    echo 'вариант 2';
 } else {
     $db = new Database();
     $perPage = 10;
