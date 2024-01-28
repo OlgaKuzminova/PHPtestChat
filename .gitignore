@@ -2,3 +2,5 @@ tmp
 .env
 db/createdb.sql
 mysql_data
+app/vendor/
+app/vendor

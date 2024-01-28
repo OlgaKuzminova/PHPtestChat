@@ -1,0 +1,13 @@
+{
+    "name": "test/messageapp",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "classmap": [
+            "src/"
+        ]
+    }
+}
