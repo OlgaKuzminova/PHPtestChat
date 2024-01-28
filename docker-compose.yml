@@ -45,10 +45,3 @@ services:
       - ./mysql_data:/var/lib/mysql
       - ./db/createdb.sql:/docker-entrypoint-initdb.d/appdb.sql
     container_name: mysql
-
-  
-
-
-
-
-      
