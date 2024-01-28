@@ -1,9 +1,4 @@
-mysql/*
-mysql_data/*
-mysql_data
-
-db/createdb.sql
-
+tmp
 .env
-
-
+db/createdb.sql
+mysql_data

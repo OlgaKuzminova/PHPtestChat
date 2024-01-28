@@ -1,44 +1,54 @@
-version: '3.3'
+version: '3.7'
 
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
+
+  nginx:
+    image: nginx:1.25.1
     volumes:
-      - ./messagesapp:/var/www/html
-      - ./messagesapp.conf:/etc/apache2/sites-available/messagesapp.conf
-      - ./messagesapp.conf:/usr/local/apache2/conf/extra/messagesapp.conf
-      - ./.htaccess:/var/www/html/.htaccess
-      - ./messagesapp:/usr/local/apache2/htdocs
+      - ./:/var/www/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/  
+    ports:
+      - 8000:80
+    container_name: app_nginx
+    depends_on:
+      - app
+
+
+  app:
+    build:
+      args:
+        user: rlusr
+        uid: 1000
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/
     extra_hosts:
       - "messagesapp.com:127.0.0.1"
     depends_on:
       - mysql
+    container_name: app
 
   mysql:
     image: mysql:8.0
+    expose:
+      - '3306'
+    restart: always
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./mysql_data:/var/lib/mysql
       - ./db/createdb.sql:/docker-entrypoint-initdb.d/appdb.sql
+    container_name: mysql
 
   
-  phpmyadmin:
-    image: phpmyadmin
-    ports:
-      - "8888:80"
-    environment:
-      PMA_HOST: mysql
-      PMA_USER: ${DB_USERNAME}
-      PMA_PASSWORD: ${DB_PASSWORD}
+
+
+
 
       

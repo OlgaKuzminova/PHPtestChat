@@ -39,3 +39,7 @@ sed -i "s/TEMP_DB_PASS/$pass/" $filename
 
 
 echo "done"
+
+
+docker-compose up -d --build
+docker-compose exec app sh -c "cd /var/www/app && composer install"

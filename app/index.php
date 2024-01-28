@@ -1,5 +1,5 @@
 <?php
-
+require 'routes.php';
 require_once './models/database.php';
 require_once './controllers/view_messages_controller.php';
 

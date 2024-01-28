@@ -1,9 +1,10 @@
 <?php
+echo 'роут подключён';
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Получаем только путь из запроса
 
-if (preg_match('/\/view_message\.php\?id=\d+/', $path, $matches)) { 
-
-    $id = $matches[1]; 
+$url = $_SERVER['REQUEST_URI'];
+if (strpos($url, '/view_message.php?id=') !== false) {
+    $id = substr($url, strpos($url, 'id=') + 3);
     echo 'работает';
 } elseif ($path === '/message') {
     
