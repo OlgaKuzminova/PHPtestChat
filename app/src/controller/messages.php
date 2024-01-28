@@ -8,7 +8,7 @@ class ViewMessages {
     }
 
     public function renderTemplate() {
-        include(__DIR__ . '/../views/view_messages.php');
+        include(__DIR__ . '/../view/messages.php');
     }
     
 }

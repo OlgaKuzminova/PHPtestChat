@@ -13,7 +13,7 @@ class ViewMessageWithComments {
     }
 
     public function renderTemplate() {
-        include(__DIR__ . '/../views/view_message.php'); 
+        include(__DIR__ . '/../view/message.php'); 
 
 
     }
