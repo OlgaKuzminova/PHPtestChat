@@ -6,7 +6,6 @@ ARG uid
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
 COPY ./docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
-COPY .env ./
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
