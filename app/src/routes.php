@@ -1,28 +1,40 @@
 <?php
-if ($DB_USERNAME && $DB_PASSWORD && $DB_DATABASE) {
-    echo 'переменные загружены';
-} else {
-    echo 'проблема с загрузкой переменных';
-}
-echo 'роут подключён';
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Получаем только путь из запроса
 
-$url = $_SERVER['REQUEST_URI'];
-if (strpos($url, '/view_message.php?id=') !== false) {
-    $id = substr($url, strpos($url, 'id=') + 3);
-    echo 'работает';
-} elseif ($path === '/message') {
-    echo 'работает';
-} elseif ($path === '/add-message') {
-}
-    
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-       
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+use App\Controller\MessageController;
+use App\Controller\MessageListController;
+
+$request = $_SERVER['REQUEST_URI'];
+echo "<pre>" . print_r($_SERVER, true) . "</pre>";
+
+$routes = [
+    '/' => 'MessageListController@index',
+    '/([0-9]+)' => 'MessageListController@index',
+    '/message/([\d]+)' => 'ViewMessageController@view',
+    '/message/edit/([0-9]+)' => 'EditMessageController@edit', 
+    '/message/update/([0-9]+)' => 'EditMessageController@update',
+];
+
+$route = rtrim($request);
+print_r($route);
+
+
+$routeMatched = false;
+foreach ($routes as $routePattern => $action) {
+    if (preg_match('#^' . $routePattern . '$#', $request, $matches)) {
+        $routeMatched = true;
+        array_shift($matches); 
+        $controllerClass = explode('@', $action)[0];
+        $method = explode('@', $action)[1];
         
-   
-} else {
+        $controller = 'App\\Controller\\' . $controllerClass;
+        $controllerInstance = new $controller();
+        $controllerInstance->$method(...$matches); 
+        break;
+    }
+}
+
+if (!$routeMatched) {
     http_response_code(404);
-    echo 'внутри роута';
+    echo '404 - Not Found';
 }
 ?>
