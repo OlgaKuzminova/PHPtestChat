@@ -15,11 +15,12 @@ class MessageModel {
 
     public function getMessages($page, $perPage) {
         $offset = ($page - 1) * $perPage;
-        $sql = "SELECT * FROM messages LIMIT ?, ?";
-        
+        $sql = "SELECT * FROM messages LIMIT :offset, :perPage";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $offset, \PDO::PARAM_INT);
-        $stmt->bindParam(2, $perPage, \PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
+        $stmt->execute();
+
 
         $stmt->execute();
         
@@ -49,17 +50,20 @@ class MessageModel {
     }
 
     public function createMessage($data) {
-        $stmt = $this->db->prepare("INSERT INTO messages (title, body) VALUES (?, ?)");
-        $stmt->execute([$data['title'], $data['body']]);
+        $stmt = $this->db->prepare("INSERT INTO messages (title, full_content) VALUES (?, ?)");
+        $stmt->execute([$data['title'], $data['full_content']]);
     }
 
-    public function updateMessage($id, $data) {
-        $stmt = $this->db->prepare("UPDATE messages SET title = ?, body = ? WHERE id = ?");
-        $stmt->execute([$data['title'], $data['body'], $id]);
+    public function updateMessage($id, $newTitle, $newContent) {
+        $stmt = $this->db->prepare("UPDATE messages SET title = ?, full_content = ? WHERE message_id = ?");
+        var_dump($newTitle);
+        var_dump($newContent);
+        var_dump($id);
+        $stmt->execute([$newTitle, $newContent, $id]);
     }
 
     public function deleteMessage($id) {
-        $stmt = $this->db->prepare("DELETE FROM messages WHERE id = ?");
+        $stmt = $this->db->prepare("DELETE FROM messages WHERE message_id = ?");
         $stmt->execute([$id]);
     }
 }

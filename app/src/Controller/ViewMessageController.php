@@ -10,9 +10,13 @@ class ViewMessageController {
         $messageModel = new MessageModel();
         $message = $messageModel->getMessageById($messageId);
 
-        $view = new View('view-message');
-        $view->setData(['message' => $message]);
-        $view->render();
+        if ($message) {
+            $view = new View('view-message');
+            $view->setData(['message' => $message]);
+            $view->render();
+        } else {
+            echo "Сообщение не найдено.";
+        }
     }
 }
 ?>
