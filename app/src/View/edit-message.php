@@ -5,6 +5,9 @@
     <link rel="stylesheet" type="text/css" href="/../style.css">
 </head>
 <body>
+    <header>
+        <a href="/">На главную</a>
+    </header>
     <h1>Редактирование сообщения</h1>
     <form action="/message/update/<?php echo $this->data['message']['message_id']; ?>" method="post">
     <?php echo $this->data['message']['message_id']; ?> 

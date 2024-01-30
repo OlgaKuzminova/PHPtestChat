@@ -5,6 +5,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <header>
+        <a href="/">На главную</a>
+    </header>
     <h1>Добавление сообщения</h1>
     <form method="post" action="/submit-message">
         <label for="title">Заголовок:</label>

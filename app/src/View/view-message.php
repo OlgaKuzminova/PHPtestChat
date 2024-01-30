@@ -5,6 +5,9 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
+    <header>
+    <a href="/">На главную</a>
+    </header>
     <h1>Просмотр сообщения</h1>
     <h2><?php echo $this->data['message']['title']; ?></h2>
     <p><?php echo $this->data['message']['full_content']; ?></p>
