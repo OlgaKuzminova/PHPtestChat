@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Сообщения</title>
-    <link rel="stylesheet" type="css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1>Список сообщений</h1>
@@ -14,7 +14,7 @@
         ?>
     </ul>
     <a href="/add-message">Добавить сообщение</a> 
-    <div>
+    <div class="pagination">
         <?php
         $totalPages = ceil($this->data['totalMessages'] / $this->data['perPage']);
         $currentPage = $this->data['currentPage'];

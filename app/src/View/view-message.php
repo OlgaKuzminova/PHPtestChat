@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Просмотр сообщения</title>
-    <link rel="stylesheet" type="text/css" href="../app/assets/style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
     <h1>Просмотр сообщения</h1>
@@ -12,7 +12,7 @@
     <h3>Комментарии:</h3>
     <?php foreach ($this->data['comments'] as $comment) : ?>
         <div>
-            <p>Автор: <?php echo $comment['author']; ?></p>
+            <p><b>Автор:</b> <?php echo $comment['author']; ?></p>
             <p>Текст: <?php echo $comment['comment_text']; ?></p>
         </div>
     <?php endforeach; ?>

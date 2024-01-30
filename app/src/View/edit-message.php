@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Редактирование сообщения</title>
-    <link rel="stylesheet" type="text/css" href="/app/assets/style.css">
+    <link rel="stylesheet" type="text/css" href="/../style.css">
 </head>
 <body>
     <h1>Редактирование сообщения</h1>
