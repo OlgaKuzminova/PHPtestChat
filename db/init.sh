@@ -8,9 +8,7 @@ if [ -f ".env" ]; then
     exit 1
 fi
 
-echo "Enter db root password "
-stty -echo
-read rootpass
+
 stty echo
 echo "Enter db name (default: docker) "
 read name
@@ -25,7 +23,7 @@ touch .env
 dbname=$([[ "$name" != "" ]] && echo "$name" || echo "docker")
 dbuser=$([[ "$user" != "" ]] && echo "$user" || echo "docker")
 
-echo "DB_ROOT_PASSWORD=$rootpass" >> .env
+
 echo "DB_DATABASE=$dbname" >> .env
 echo "DB_USERNAME=$dbuser" >> .env
 echo "DB_PASSWORD=$pass" >> .env
