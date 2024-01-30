@@ -37,34 +37,35 @@ HTML версии > 4
    ```bash
    docker-compose up -d
 # Логи
-## Для просмотра логов приложения выполняйте следующую команду:
+## Для просмотра логов приложения выполните следующую команду:
 
-bash
+   ```bash
+   docker-compose logs -f
 
-docker-compose logs -f
 # Управление контейнерами
 ## Для просмотра списка контейнеров выполните команду:
 
-bash
-
-docker-compose ps
+   ```bash
+   docker-compose ps
+   
 ## Для остановки контейнеров выполните команду:
 
-bash
+   ```bash
 
 docker-compose stop
 # Инициализация базы данных
 ## Для инициализации базы данных выполните скрипт:
 
-bash
+   ```bash
 
 sh ./db/init.sh
 ## Для удаления базы данных и связанных файлов выполните команду:
 
-bash
+   ```bash
 
 docker-compose rm --stop --volumes --force
 rm .env || true
 rm ./db/createdb.sql || true
+
 Примечание: Перед выполнением вышеперечисленных команд убедитесь, что у вас установлен Docker и Docker Compose.
 
