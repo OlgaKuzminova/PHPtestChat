@@ -12,6 +12,7 @@
         }
         ?>
     </ul>
+    <a href="/add-message">Добавить сообщение</a> 
     <div>
         <?php
         $totalPages = ceil($this->data['totalMessages'] / $this->data['perPage']);

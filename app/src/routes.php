@@ -1,6 +1,6 @@
 <?php
 
-use App\Controller\MessageController;
+use App\Controller\ViewMessageController;
 use App\Controller\MessageListController;
 use App\Controller\EditMessageController;
 
@@ -12,8 +12,10 @@ $routes = [
     '/message/edit/(\d+)' => 'EditMessageController@edit', 
     '/message/update/(\d+)' => 'EditMessageController@update',
     '/message/(\d+)' => 'ViewMessageController@view',
+    '/add-comment/(\d+)' => 'CommentController@addComment', 
+    '/add-message' => 'NewMessageController@showAddMessageView',  
+    '/submit-message' => 'NewMessageController@addMessage', 
     '/([0-9]+)' => 'MessageListController@index',
-    
     '/' => 'MessageListController@index',
 ];
 $route = rtrim($request);
@@ -29,7 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (preg_match('#^' . $routePattern . '$#', $request, $matches)) {
 
-            $messageId = $matches[1];
+            if (isset($matches[1])) {
+                $messageId = $matches[1];
+            }
+            
             $routeMatched = true;
             $controllerClass = explode('@', $action)[0];
 
@@ -37,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $controller = 'App\\Controller\\' . $controllerClass;
             $controllerInstance = new $controller();
-            $controllerInstance->$method($messageId, $postData);
+            $controllerInstance->$method($messageId ?? null, $postData);
             break;
         }
     }

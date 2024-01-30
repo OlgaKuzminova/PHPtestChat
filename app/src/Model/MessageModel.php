@@ -50,9 +50,10 @@ class MessageModel {
     }
 
     public function createMessage($data) {
-        $stmt = $this->db->prepare("INSERT INTO messages (title, full_content) VALUES (?, ?)");
-        $stmt->execute([$data['title'], $data['full_content']]);
+        $stmt = $this->db->prepare("INSERT INTO messages (title, author, brief_content, full_content) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$data['title'], $data['author'], $data['brief_content'], $data['full_content']]);
     }
+    
 
     public function updateMessage($id, $newTitle, $newContent) {
         $stmt = $this->db->prepare("UPDATE messages SET title = ?, full_content = ? WHERE message_id = ?");
