@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Сообщения</title>
+    <link rel="stylesheet" type="css" href="style.css">
 </head>
 <body>
     <h1>Список сообщений</h1>
@@ -18,15 +19,15 @@
         $totalPages = ceil($this->data['totalMessages'] / $this->data['perPage']);
         $currentPage = $this->data['currentPage'];
         if ($currentPage > 1) {
-            echo "<a href='?page=1'>Первая</a>";
-            echo "<a href='?page=".($currentPage - 1)."'>Предыдущая</a>";
+            echo "<a href='/1'>Первая</a>";
+            echo "<a href='/".($currentPage - 1)."'>Предыдущая</a>";
         }
         for ($i = max(1, $currentPage - 3); $i <= min($currentPage + 3, $totalPages); $i++) {
-            echo "<a href='?page=".$i."'>".$i."</a>";
+            echo "<a href='/".$i."'>".$i."</a>";
         }
         if ($currentPage < $totalPages) {
-            echo "<a href='?page=".($currentPage + 1)."'>Следующая</a>";
-            echo "<a href='?page=".$totalPages."'>Последняя</a>";
+            echo "<a href='/".($currentPage + 1)."'>Следующая</a>";
+            echo "<a href='/".$totalPages."'>Последняя</a>";
         }
         ?>
     </div>
