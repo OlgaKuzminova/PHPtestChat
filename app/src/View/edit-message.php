@@ -6,6 +6,7 @@
 <body>
     <h1>Редактирование сообщения</h1>
     <form action="/message/update/<?php echo $this->data['message']['message_id']; ?>" method="post">
+    <?php echo $this->data['message']['message_id']; ?> 
         <label for="title">Заголовок:</label><br>
         <input type="text" id="title" name="title" value="<?php echo $this->data['message']['title']; ?>"><br>
         <label for="full_content">Содержание:</label><br>

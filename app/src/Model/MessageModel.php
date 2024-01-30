@@ -8,7 +8,7 @@ class MessageModel {
 
     public function __construct() {
         $mysql = "mysql:host=" . DB_HOST . ";dbname=" . DB_DATABASE . ";port=3306;charset=utf8;unix_socket=/var/run/mysqld/mysqld.sock";
-        print_r($mysql);
+
         $this->db = new \PDO($mysql, DB_USERNAME, DB_PASSWORD);
     }
 
@@ -56,10 +56,16 @@ class MessageModel {
 
     public function updateMessage($id, $newTitle, $newContent) {
         $stmt = $this->db->prepare("UPDATE messages SET title = ?, full_content = ? WHERE message_id = ?");
-        var_dump($newTitle);
-        var_dump($newContent);
-        var_dump($id);
-        $stmt->execute([$newTitle, $newContent, $id]);
+
+        try {
+            $stmt->execute([$newTitle, $newContent, $id]);
+
+            return 'success';
+        } catch (PDOException $e) {
+            echo 'Ошибка при обновлении сообщения: ' . $e->getMessage();
+        }
+        
+        
     }
 
     public function deleteMessage($id) {

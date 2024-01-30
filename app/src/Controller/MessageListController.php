@@ -10,7 +10,6 @@ class MessageListController {
         $perPage = 10;
         $messageModel = new MessageModel();
         $messages = $messageModel->getMessages($pageNumber, $perPage);
-        print_r($messages);
         $totalMessages = $messageModel->getTotalMessagesCount(); 
         $data = [
             'messages' => $messages,
