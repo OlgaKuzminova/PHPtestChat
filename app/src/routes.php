@@ -3,6 +3,7 @@
 use App\Controller\ViewMessageController;
 use App\Controller\MessageListController;
 use App\Controller\EditMessageController;
+use App\Controller\DeleteMessageAndRelatedController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -14,7 +15,8 @@ $routes = [
     '/message/(\d+)' => 'ViewMessageController@view',
     '/add-comment/(\d+)' => 'CommentController@addComment', 
     '/add-message' => 'NewMessageController@showAddMessageView',  
-    '/submit-message' => 'NewMessageController@addMessage', 
+    '/submit-message' => 'NewMessageController@addMessage',
+    '/message/delete/(\d+)' => 'DeleteMessageAndRelatedController@deleteMessageAndRelated', 
     '/([0-9]+)' => 'MessageListController@index',
     '/' => 'MessageListController@index',
 ];

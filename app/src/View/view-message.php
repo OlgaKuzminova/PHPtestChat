@@ -21,6 +21,7 @@
     <?php endforeach; ?>
 
     <a href="/message/edit/<?php echo $this->data['message']['message_id']; ?>">Редактировать сообщение</a>
+    <a href="/message/delete/<?php echo $this->data['message']['message_id']; ?>">Удалить сообщение</a>
 
     <h3>Добавить комментарий:</h3>
     <form method="post" action="/add-comment/<?php echo $this->data['message']['message_id']; ?>">

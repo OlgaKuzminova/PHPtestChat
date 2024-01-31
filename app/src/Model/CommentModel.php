@@ -29,10 +29,10 @@ class CommentModel {
         $stmt->execute();
     }
 
-    public function deleteComment($commentId) {
-        $sql = "DELETE FROM comments WHERE comment_id = :commentId";
+    public function deleteComments($message_id) {
+        $sql = "DELETE FROM comments WHERE message_id = :message_id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
+        $stmt->bindParam(':message_id', $message_id, \PDO::PARAM_INT);
         $stmt->execute();
     }
 
